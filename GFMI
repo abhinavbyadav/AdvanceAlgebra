@@ -1,0 +1,25 @@
+\\{"metadata":{"language_info":{"name":"python","version":"3.7.8","mimetype":"text/x-python","codemirror_mode":{"name":"ipython","version":3},"pygments_lexer":"ipython3","nbconvert_exporter":"python","file_extension":".py"},"kernelspec":{"name":"python3","display_name":"Python 3","language":"python"}},"nbformat_minor":5,"nbformat":4,"cells":[{"cell_type":"code","source":"
+import numpy as np
+
+def GFMI(n,p): #Function to determine multiplicative inverse of number 'n' in the prime field 'p'
+Dr=n;# Dr means divisor
+Dd=p;# Dd means dividend
+[q,r]=divmod(Dd,Dr); # quotient and remainder are returned by the function 'divmod'
+t1=0;
+t2=1;
+t=(t1-t2*q);
+Holder=[Dd, Dr, q, r, t1, t2, t];
+counter=1;
+while r>1:
+  Dd=Dr;
+  Dr=r;
+  [q,r]=divmod(Dd,Dr);
+  t1=t2;
+  t2=t;
+  t=(t1-t2*q);
+  Holder=np.append(Holder,[Dd, Dr, q, r, t1, t2, t]);
+  counter=counter+1;
+  if Holder[-1]>0:
+    return Holder[-1];
+  else:
+    return [Holder[-1], Holder[-1]+p];
